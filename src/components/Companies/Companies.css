@@ -1,0 +1,84 @@
+.companies {
+    padding: 80px 8%;
+    background: #0b1120;
+}
+
+/* TITLE */
+.company-title {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+/* CHART WRAPPER */
+.company-chart {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 60px auto;
+    background: #111827;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+/* COMPANY GRID */
+.company-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* CARD */
+.company-card {
+    width: 180px;
+    height: 90px;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    background: #111827;
+    transition: .35s;
+}
+
+.company-card:hover {
+    transform: translateY(-8px);
+    border-color: #FFC801;
+    box-shadow: 0 0 30px rgba(255,200,1,.18);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .company-chart {
+        max-width: 400px;
+    }
+
+    .company-card {
+        width: 160px;
+        height: 85px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .companies {
+        padding: 60px 5%;
+    }
+
+    .company-chart {
+        max-width: 320px;
+    }
+
+    .company-card {
+        width: 140px;
+        height: 80px;
+        font-size: 15px;
+    }
+}

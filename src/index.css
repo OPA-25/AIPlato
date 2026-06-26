@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ===========================
+        ROOT VARIABLES
+=========================== */
+
+:root{
+  --primary:#FFC801;
+  --secondary:#FF9932;
+
+  --dark:#172B36;
+  --dark2:#114C5A;
+
+  --light:#F1F6F4;
+  --light2:#D9E8E2;
+}
+
+/* ===========================
+        GLOBAL RESET
+=========================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  background:var(--dark);
+  color:white;
+  font-family:'Inter', sans-serif;
+  overflow-x:hidden;
+}
+
+/* ===========================
+        TYPOGRAPHY
+=========================== */
+
+h1,h2,h3,h4,h5,h6{
+  font-family:'JetBrains Mono', monospace;
+}
+
+/* ===========================
+        GLOBAL SECTION STYLE
+=========================== */
+
+section{
+  padding:100px 8%;
+}
+
+/* ===========================
+        ANIMATIONS
+=========================== */
+
+/* Fade Up */
+@keyframes fadeUp{
+  0%{
+    opacity:0;
+    transform:translateY(60px);
+  }
+  100%{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Fade Left */
+@keyframes fadeLeft{
+  0%{
+    opacity:0;
+    transform:translateX(-80px);
+  }
+  100%{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+/* Fade Right */
+@keyframes fadeRight{
+  0%{
+    opacity:0;
+    transform:translateX(80px);
+  }
+  100%{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+/* Zoom */
+@keyframes zoom{
+  0%{
+    opacity:0;
+    transform:scale(.8);
+  }
+  100%{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+/* ===========================
+        ANIMATION HELPERS
+=========================== */
+
+.fade-up{
+  animation:fadeUp 0.8s ease forwards;
+}
+
+.fade-left{
+  animation:fadeLeft 0.8s ease forwards;
+}
+
+.fade-right{
+  animation:fadeRight 0.8s ease forwards;
+}
+
+.zoom{
+  animation:zoom 0.8s ease forwards;
+}
+
+/* ===========================
+        SCROLLBAR (OPTIONAL POLISH)
+=========================== */
+
+::-webkit-scrollbar{
+  width:8px;
+}
+
+::-webkit-scrollbar-track{
+  background:#0b1120;
+}
+
+::-webkit-scrollbar-thumb{
+  background:var(--primary);
+  border-radius:10px;
+}
