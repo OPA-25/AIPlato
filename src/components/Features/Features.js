@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import "./Features.css";
 import features from "../../data/featuresData";
 
-// Icons
 import {
   FaRobot,
   FaChartLine,
@@ -12,106 +11,96 @@ import {
 } from "react-icons/fa";
 
 function Features() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-    const [mobile, setMobile] = useState(window.innerWidth < 768);
-    const [active, setActive] = useState(0);
+  // 🔥 IMPORTANT: keeps last active index safe during resize
+  const lastActiveRef = useRef(0);
 
-    useEffect(() => {
-        const resize = () => setMobile(window.innerWidth < 768);
-        window.addEventListener("resize", resize);
-        return () => window.removeEventListener("resize", resize);
-    }, []);
+  const icons = useRef([
+    <FaRobot />,
+    <FaChartLine />,
+    <FaCloud />,
+    <FaShieldAlt />,
+    <FaBrain />
+  ]);
 
-    // icon mapping (adds SaaS feel)
-    const icons = [
-        <FaRobot />,
-        <FaChartLine />,
-        <FaCloud />,
-        <FaShieldAlt />,
-        <FaBrain />
-    ];
+  // detect screen size safely
+  const handleResize = useCallback(() => {
+    const mobileView = window.innerWidth < 768;
 
-    return (
-        <section className="features" id="features">
+    setIsMobile(mobileView);
 
-            <div className="features-header">
+    // 🔥 CONTEXT LOCK RULE (HACKATHON CRITICAL)
+    // preserve active state during layout switch
+    setActiveIndex(lastActiveRef.current);
+  }, []);
 
-                <span>FEATURES</span>
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [handleResize]);
 
-                <h2>Everything Your Business Needs</h2>
+  const handleSelect = (index) => {
+    setActiveIndex(index);
+    lastActiveRef.current = index;
+  };
 
-                <p>
-                    One codebase. Desktop Bento. Mobile Accordion.
-                    Built for AI-powered automation.
-                </p>
+  return (
+    <section className="features" id="features">
+      <div className="features-header">
+        <span>FEATURES</span>
+        <h2>Everything Your Business Needs</h2>
+        <p>
+          One system. Dual experience. Bento on desktop, Accordion on mobile.
+        </p>
+      </div>
 
+      {/* ================= MOBILE ACCORDION ================= */}
+      {isMobile ? (
+        <div className="accordion">
+          {features.map((item, index) => (
+            <div className="accordion-item" key={item.id}>
+              <div
+                className="accordion-title"
+                onClick={() => handleSelect(index)}
+              >
+                <span className="icon">{icons.current[index]}</span>
+                {item.title}
+              </div>
+
+              {activeIndex === index && (
+                <div className="accordion-content">
+                  {item.description}
+                </div>
+              )}
             </div>
+          ))}
+        </div>
+      ) : (
+        /* ================= DESKTOP BENTO ================= */
+        <div className="bento-grid">
+          {features.map((item, index) => (
+            <div
+              key={item.id}
+              className={`bento-card ${
+                activeIndex === index ? "selected" : ""
+              }`}
+              onMouseEnter={() => handleSelect(index)}
+            >
+              <div className="card-icon">
+                {icons.current[index]}
+              </div>
 
-            {
-                mobile ? (
-
-                    <div className="accordion">
-
-                        {features.map((item, index) => (
-
-                            <div className="accordion-item" key={item.id}>
-
-                                <div
-                                    className="accordion-title"
-                                    onClick={() => setActive(index)}
-                                >
-
-                                    <span className="icon">
-                                        {icons[index]}
-                                    </span>
-
-                                    {item.title}
-
-                                </div>
-
-                                {active === index && (
-                                    <div className="accordion-content">
-                                        {item.description}
-                                    </div>
-                                )}
-
-                            </div>
-
-                        ))}
-
-                    </div>
-
-                ) : (
-
-                    <div className="bento-grid">
-
-                        {features.map((item, index) => (
-
-                            <div
-                                key={item.id}
-                                className={`bento-card ${active === index ? "selected" : ""}`}
-                                onClick={() => setActive(index)}
-                            >
-
-                                <div className="card-icon">
-                                    {icons[index]}
-                                </div>
-
-                                <h3>{item.title}</h3>
-
-                                <p>{item.description}</p>
-
-                            </div>
-
-                        ))}
-
-                    </div>
-
-                )
-            }
-
-        </section>
-    );
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </section>
+  );
 }
 
 export default Features;

@@ -1,57 +1,66 @@
-import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import {
+  FaBars,
+  FaTimes,
   FaBrain,
-  FaRupeeSign,
   FaStar,
   FaQuestionCircle,
-  FaRocket
+  FaRocket,
+  FaDollarSign
 } from "react-icons/fa";
+
 import "./Navbar.css";
 
 function Navbar() {
   const [menu, setMenu] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      setScrolled(window.scrollY > 40);
+    };
+
+    window.addEventListener("scroll", scrollHandler);
+
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, []);
 
   return (
-    <header className="navbar">
+    <header className={`navbar ${scrolled ? "navbar-scroll" : ""}`}>
 
-      {/* LOGO */}
-      <div className="logo">
-        AIPlato
-      </div> 
+      <a href="#" className="logo">
+        <span>AI</span>Plato
+      </a>
 
-      {/* NAV LINKS */}
       <nav className={menu ? "nav active" : "nav"}>
 
         <a href="#features" onClick={() => setMenu(false)}>
-          <FaBrain style={{ marginRight: "8px", color: "#FFC801" }} />
+          <FaBrain />
           Features
         </a>
 
         <a href="#pricing" onClick={() => setMenu(false)}>
-          <FaRupeeSign  style={{ marginRight: "8px", color: "#FFC801" }} />
+          <FaDollarSign />
           Pricing
         </a>
 
         <a href="#testimonials" onClick={() => setMenu(false)}>
-          <FaStar style={{ marginRight: "8px", color: "#FFC801" }} />
-          Testimonials
+          <FaStar />
+          Reviews
         </a>
 
         <a href="#faq" onClick={() => setMenu(false)}>
-          <FaQuestionCircle style={{ marginRight: "8px", color: "#FFC801" }} />
+          <FaQuestionCircle />
           FAQ
         </a>
 
-        {/* CTA BUTTON */}
         <button className="desktop-btn">
-          <FaRocket style={{ marginRight: "8px" }} />
-          Get Started
+          <FaRocket />
+          Launch AI
         </button>
 
       </nav>
 
-      {/* MOBILE MENU ICON */}
       <div className="menu-icon" onClick={() => setMenu(!menu)}>
         {menu ? <FaTimes /> : <FaBars />}
       </div>

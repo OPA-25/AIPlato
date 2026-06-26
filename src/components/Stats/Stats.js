@@ -1,36 +1,61 @@
 import "./Stats.css";
+import {
+  FaRobot,
+  FaBolt,
+  FaServer,
+  FaCheckCircle
+} from "react-icons/fa";
+
+const stats = [
+  {
+    icon: <FaRobot />,
+    value: "2.4M",
+    label: "AI Requests Today",
+    status: "Live"
+  },
+  {
+    icon: <FaServer />,
+    value: "128",
+    label: "Active AI Models",
+    status: "Running"
+  },
+  {
+    icon: <FaBolt />,
+    value: "118ms",
+    label: "Average Response",
+    status: "Optimized"
+  },
+  {
+    icon: <FaCheckCircle />,
+    value: "99.98%",
+    label: "Automation Success",
+    status: "Verified"
+  }
+];
 
 function Stats() {
   return (
     <section className="stats">
 
-      <div className="stats-card">
+      {stats.map((item, index) => (
 
-        <h2>10M+</h2>
-        <p>Records Processed</p>
+        <div className="stats-card" key={index}>
 
-      </div>
+          <div className="stats-icon">
+            {item.icon}
+          </div>
 
-      <div className="stats-card">
+          <h2>{item.value}</h2>
 
-        <h2>500+</h2>
-        <p>Enterprise Clients</p>
+          <p>{item.label}</p>
 
-      </div>
+          <span className="status">
+            ● {item.status}
+          </span>
 
-      <div className="stats-card">
+        </div>
 
-        <h2>99.9%</h2>
-        <p>AI Accuracy</p>
-
-      </div>
-
-      <div className="stats-card">
-
-        <h2>24/7</h2>
-        <p>Platform Availability</p>
-
-      </div>
+      ))}
 
     </section>
   );

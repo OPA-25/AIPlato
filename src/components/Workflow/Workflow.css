@@ -3,8 +3,8 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:80px;
-    background:#0b1120;
+    gap:70px;
+    background:#050816;
 }
 
 .workflow-left{
@@ -12,47 +12,47 @@
 }
 
 .section-tag{
-    color:#3b82f6;
-    font-weight:600;
-    margin-bottom:15px;
-    letter-spacing:1px;
+    color:#00E5FF;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:18px;
 }
 
 .workflow-left h2{
-    color:#fff;
+    color:white;
     font-size:48px;
-    margin-bottom:20px;
     line-height:1.3;
+    margin-bottom:20px;
 }
 
 .workflow-desc{
-    color:#94a3b8;
+    color:#9CA3AF;
     line-height:1.8;
-    margin-bottom:40px;
+    margin-bottom:45px;
 }
 
 .steps{
     display:flex;
     flex-direction:column;
-    gap:25px;
+    gap:28px;
 }
 
 .step{
     display:flex;
-    gap:20px;
-    align-items:flex-start;
+    gap:18px;
 }
 
 .step-number{
-    width:55px;
-    height:55px;
+    width:56px;
+    height:56px;
     border-radius:50%;
-    background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+    background:linear-gradient(135deg,#00E5FF,#7C3AED);
     display:flex;
     justify-content:center;
     align-items:center;
-    color:#fff;
+    color:white;
     font-weight:bold;
+    flex-shrink:0;
 }
 
 .step h3{
@@ -61,8 +61,11 @@
 }
 
 .step p{
-    color:#94a3b8;
+    color:#94A3B8;
+    line-height:1.6;
 }
+
+/* RIGHT */
 
 .workflow-right{
     flex:1;
@@ -71,70 +74,129 @@
 }
 
 .workflow-box{
-    width:420px;
-    background:#111827;
-    border-radius:20px;
+    width:430px;
+    background:#0F172A;
+    border:1px solid rgba(0,229,255,.15);
+    border-radius:22px;
     padding:35px;
-    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 0 35px rgba(0,229,255,.08);
+}
+
+.live-status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#00E676;
+    font-size:14px;
+    margin-bottom:18px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    background:#00E676;
+    border-radius:50%;
+    animation:pulse 1.5s infinite;
 }
 
 .workflow-box h3{
     color:white;
-    margin-bottom:30px;
+    margin-bottom:25px;
 }
 
-.progress-box span{
-    color:#cbd5e1;
+.progress-title{
+    display:flex;
+    justify-content:space-between;
+    color:white;
+    margin-bottom:10px;
 }
 
 .progress{
-    margin-top:12px;
-    width:100%;
     height:10px;
-    background:#1e293b;
+    background:#1E293B;
     border-radius:20px;
     overflow:hidden;
 }
 
 .progress-fill{
-    width:82%;
+    width:84%;
     height:100%;
-    background:linear-gradient(90deg,#3b82f6,#8b5cf6);
+    background:linear-gradient(90deg,#00E5FF,#7C3AED);
 }
 
-.status-card{
-    margin-top:35px;
-    display:flex;
-    justify-content:space-between;
-    background:#1e293b;
-    padding:20px;
-    border-radius:15px;
+.progress-box small{
+    display:block;
+    color:#94A3B8;
+    margin-top:12px;
 }
 
-.status-card h4{
-    color:#cbd5e1;
+.status-grid{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.status-item{
+    background:#111827;
+    border-radius:14px;
+    padding:18px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.status-item h4{
+    color:#94A3B8;
     margin-bottom:8px;
 }
 
-.status-card p{
+.status-item p{
     color:white;
     font-size:22px;
     font-weight:bold;
 }
 
-.success{
+.activity-feed{
     margin-top:30px;
-    padding:15px;
-    background:#14532d;
-    color:#86efac;
-    border-radius:10px;
-    text-align:center;
+}
+
+.activity-feed h4{
+    color:white;
+    margin-bottom:15px;
+}
+
+.activity-feed ul{
+    padding-left:18px;
+}
+
+.activity-feed li{
+    color:#CBD5E1;
+    margin-bottom:12px;
+}
+
+@keyframes pulse{
+
+0%{
+opacity:.4;
+transform:scale(.9);
+}
+
+50%{
+opacity:1;
+transform:scale(1.3);
+}
+
+100%{
+opacity:.4;
+transform:scale(.9);
+}
+
 }
 
 @media(max-width:992px){
 
 .workflow{
 flex-direction:column;
+padding:90px 6%;
 }
 
 .workflow-left h2{
@@ -143,6 +205,22 @@ font-size:38px;
 
 .workflow-box{
 width:100%;
+}
+
+}
+
+@media(max-width:576px){
+
+.workflow{
+padding:80px 5%;
+}
+
+.workflow-left h2{
+font-size:30px;
+}
+
+.status-grid{
+grid-template-columns:1fr;
 }
 
 }
