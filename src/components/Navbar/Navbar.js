@@ -28,9 +28,9 @@ function Navbar() {
   return (
     <header className={`navbar ${scrolled ? "navbar-scroll" : ""}`}>
 
-      <a href="#" className="logo">
+      <div className="logo">
         <span>AI</span>Plato
-      </a>
+      </div>
 
       <nav className={menu ? "nav active" : "nav"}>
 
